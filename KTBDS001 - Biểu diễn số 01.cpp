@@ -1,27 +1,15 @@
-#include<bits/stdc++.h>
-using namespace std;
+from math import*
+MOD = 10**9 + 7
 
-#define ll long long
-const int Mod = 1e9 + 7;
 
-ll cnt(int n){
-	ll p[n+1] = {0};
-	p[0] = 1;
-	for(int i = 1; i <= n; i++){
-		for(int j = i; j <= n; j++){
-			p[j] += p[j-i];
-			p[j] %= Mod;
-		}
-	}
-	return p[n];
-}
-
-int main(){
-	int t;
-	cin >> t;
-	while(t--){
-		int n;
-		cin >> n;
-		cout << cnt(n) - 1 << endl;
-	}
-}
+if __name__ == "__main__":
+    t = int(input())
+    for _ in range(t):
+        n = int(input())
+        dp = [0]*100001
+        dp[0] = 1
+        for x in range(1, n + 1):
+            for i in range(x, n + 1):
+                dp[i] = dp[i] + dp[i-x]
+                dp[i] = dp[i] % MOD
+        print(dp[n] - 1)
